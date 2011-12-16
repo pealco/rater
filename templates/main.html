@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sentence Rater</title>
+
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="#">Sentence Rater</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="hero-unit">
+        <p>{{ sentence.sentence }}</p>
+        <ul>
+          <li>Subject: {{ sentence.subject.word }}</li>
+          <li>Intervenor: {{ sentence.intervenor }}</li>
+        </ul>
+            
+      </div>
+      
+      <div class="row">
+        
+        <div class="span10 offset6">
+          <p class="small">Is this sentence appropriate for inclusion?</p>
+          <p>
+            <a href="/rate/{{sentence.id}}/yes/" class="btn large primary">Yes</a>
+            <a href="/rate/{{sentence.id}}/no/" class="btn large primary">No</a>
+            <a href="/rate/{{sentence.id}}/notsure/" class="btn small">Not sure</a>
+          </p>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="span10">
+          <img src="/data.png">
+        </div>
+        <div class="span6">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Gram</th>
+                <th>Ungram</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Yes</th>
+                <td>{{ gram.yes }}</td>
+                <td>{{ ungram.yes }}</td>
+              </tr>
+              <tr>
+                <th>No</th>
+                <td>{{ gram.no }}</td>
+                <td>{{ ungram.no }}</td>
+              </tr>
+              <tr>
+                <th>Not sure</th>
+                <td>{{ gram.notsure }}</td>
+                <td>{{ ungram.notsure }}</td>
+              </tr>
+              <tr>
+                <th>Unrated</th>
+                <td>{{ gram.unrated }}</td>
+                <td>{{ ungram.unrated }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+    </div>
+      
+    
+    {% block footer_includes %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script src="http://oscargodson.com/labs/jkey/jquery.jkey-1.2.js"></script>
+    
+    <script>
+      $(document).jkey('f',function(){
+        window.location.replace("/rate/{{sentence.id}}/yes/");
+      });
+      
+      $(document).jkey('j',function(){
+        window.location.replace("/rate/{{sentence.id}}/no/");
+      });
+    
+    </script>
+    
+    {% endblock %}
+    
+  </body>
+</html>
+
+
+
